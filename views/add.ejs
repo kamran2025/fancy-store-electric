@@ -36,7 +36,7 @@
 <body>
   <h2 class="text-center my-4">Add Product</h2>
   <div class="d-flex align-items-center justify-content-center">
-    <form id="product-form" class="col-10 col-md-6 col-xl-4" action="/add" method="post" >
+    <form id="product-form" class="col-10 col-md-6 col-xl-4" action="/dashboard/add" method="post" >
       <input type="text" name="id" class="form-control d-none" id="productId">
       <label for="title">Title</label>
       <input type="text" id="title" name="title" class="form-control" required><br>
@@ -51,8 +51,8 @@
       <input type="text" id="category" name="category" class="form-control" required><br>
       <!-- <input type="text" name="imgUrl" class="form-control" id="imgUrl"> -->
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <img id="showImg" width="300" height="300" class="img-fluid rounded-2 border " src="https://cdn.pixabay.com/photo/2024/02/26/19/39/monochrome-image-8598798_640.jpg" alt="img">
-        <label for="image" class="btn w-50 my-4 py-2 text-white rounded-5 text-center bg-danger">Photo</label>
+        <img id="showImg" width="300" height="300" class="img-fluid rounded-2 border " src="https://cdn.pixabay.com/photo/2016/03/21/20/05/image-1271454_640.png" alt="img">
+        <label for="image" class="btn w-50 my-4 py-2 text-white rounded-5 text-center bg-danger">Upload Photo</label>
       </div>
      
       <input type="file" id="image" name="image" accept="image/*" class="form-control d-none"><br>

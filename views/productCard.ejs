@@ -1,0 +1,23 @@
+
+<div class="row">
+  <% products.forEach(product=> { %>
+    <div class="col-lg-4 col-md-6 text-center">
+      <div class="single-product-item">
+        <div class="product-image">
+          <a href="electric-online/<%= product.get('id') %>">
+            <img src="<%= product.get('image') %>" alt="img">
+          </a>
+        </div>
+        <h3>
+          <%= product.get('title') %>
+        </h3>
+        <h5 class="fw-bold" style="font-size: 26px; font-weight: 400;"><span
+            style="font-size: 22px; margin-right: -5px;">₹</span>
+          <%= product.get('price') %>
+        </h5>
+        <a href="https://wa.me/+917044012863" class="cart-btn px-5">Get Price</a>
+      </div>
+    </div>
+    <% }) %>
+
+</div>

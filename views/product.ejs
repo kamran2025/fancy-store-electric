@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>Fancy Store | Electric - Product</title>
+
+  <!-- All CSS  -->
+  <%- include('lib_css') %>
+
+</head>
+<body>
+	
+	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+	
+	<!-- header -->
+    <%- include('header') %>
+	<!-- end header -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<h1><%= product.get('title') %></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+	<div class="single-product mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<div class="single-product-img">
+						<img src="<%= product.get('image') %>" alt="img">
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="single-product-content">
+						<h3><%= product.get('title') %></h3>
+						<p style="font-size: 25px; font-weight: 600;"><span style="font-size: 18px; font-weight: 400; margin-right: 2px;">₹</span><%= product.get('price') %></p>
+						<p><%= product.get('description') %></p>
+            <p style="font-weight: 400; font-size: 16px;">Category : <span style="font-weight: 400; font-size: 14px; margin-left: 10px;"><%= product.get('category') %></span>
+            </p>
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href="" ><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-whatsapp"></i></a></li>
+							<li><a href=""><i class="fab fa-instagram"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product -->
+
+	<!-- more products -->
+	<div class="more-products mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Related</span> Products</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+        <% 
+          let items = products.filter(item => item.get('category') == product.get('category'));
+        %>
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="#"><img src="<%= items[0].get('image') %>" alt="img"></a>
+						</div>
+            <h3><%= items[0].get('title') %></h3>
+						<h5 class="fw-bold" style="font-size: 26px; font-weight: 400;"><span
+              style="font-size: 22px; margin-right: -5px;">₹</span> <%= items[0].get('price') %>
+          </h5>
+						<a href="https://wa.me/+917044012863" class="cart-btn px-5"></i> Get Price</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="#"><img src="<%= items[1].get('image') %>" alt=""></a>
+						</div>
+						<h3><%= items[1].get('title') %></h3>
+						<h5 class="fw-bold" style="font-size: 26px; font-weight: 400;"><span
+              style="font-size: 22px; margin-right: -5px;">₹</span> <%= items[1].get('price') %>
+          </h5>
+						<a href="https://wa.me/+917044012863" class="cart-btn px-5"></i> Get Price</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="#"><img src="<%= items[2].get('image') %>" alt=""></a>
+						</div>
+						<h3><%= items[2].get('title') %></h3>
+						<h5 class="fw-bold" style="font-size: 26px; font-weight: 400;"><span
+              style="font-size: 22px; margin-right: -5px;">₹</span> <%= items[2].get('price') %>
+          </h5>
+						<a href="https://wa.me/+917044012863" class="cart-btn px-5"></i> Get Price</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end more products -->
+
+	<!-- footer -->
+  <%- include('footer') %>
+	<!-- end footer -->
+	
+  <!-- All Scripts  -->
+  
+  <%- include('lib_js') %>
+
+</body>
+</html>

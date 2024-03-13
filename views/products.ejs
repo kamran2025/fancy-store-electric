@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+  <!-- title -->
+  <title>Fancy Store | Products</title>
+
+  <!-- All CSS  -->
+  <%- include('lib_css') %>
+
+</head>
+
+<body>
+
+  <!--PreLoader-->
+  <div class="loader">
+    <div class="loader-inner">
+      <div class="circle"></div>
+    </div>
+  </div>
+  <!--PreLoader Ends-->
+
+  <!-- header -->
+  <%- include('header') %>
+  <!-- end header -->
+
+  <!-- breadcrumb-section -->
+  <div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <h1>Products</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
+
+  <!-- products -->
+  <div class="product-section mt-5 mb-5">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="product-filters">
+            <ul>
+              <li class="active" data-filter="*">All</li>
+              <li data-filter=".strawberry">Bulb</li>
+              <li data-filter=".berry">Wire</li>
+              <li data-filter=".lemon">Lamp</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <%- include('productCard') %>
+    </div>
+  </div>
+  <!-- end products -->
+
+  <!-- footer -->
+  <%- include('footer') %>
+  <!-- end footer -->
+
+  <!-- All Scripts  -->
+  <%- include('lib_js') %>
+
+</body>
+
+</html>

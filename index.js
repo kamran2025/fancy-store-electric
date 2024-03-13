@@ -36,34 +36,41 @@ async function getData() {
   return rows;
 }
 
-// Render home page with data
+// render home page
 app.get('/', async (req, res) => {
   const rowss = await getData();
+  const products = rowss.reverse();
+  res.render('index', { products });
+})
+
+// Render home page with data
+app.get('/dashboard', async (req, res) => {
+  const rowss = await getData();
   const rows = rowss.reverse();
-  res.render('index', { rows });
+  res.render('dashboard', { rows });
 })
 
 // render add page
-app.get('/add', (req, res) => {
+app.get('/dashboard/add', (req, res) => {
   res.render('add');
 })
 
 // add data to google sheet
-app.post('/add', async (req, res) => {
+app.post('/dashboard/add', async (req, res) => {
   await doc.loadInfo();
   const rows = await sheet.addRow(req.body);
-  res.redirect('/');
+  res.redirect('/dashboard');
 })
 
 // render edit page
-app.get('/edit/:id', async (req, res) => {
+app.get('/dashboard/edit/:id', async (req, res) => {
   const rows = await getData();
   const row = rows.find(row => row.get('id') == req.params.id)
   res.render('edit', { row });
 })
 
 // Route to update row values in Google Sheet
-app.post('/edit/:id', async (req, res) => {
+app.post('/dashboard/edit/:id', async (req, res) => {
   await doc.loadInfo();
   const rows = await sheet.getRows();
   rows.forEach(async row => {
@@ -72,11 +79,11 @@ app.post('/edit/:id', async (req, res) => {
       await row.save();
     }
     })
-  res.redirect('/');
+  res.redirect('/dashboard');
 });
 
 // delete data in google sheet
-app.get('/delete/:id', async (req, res) => {
+app.get('/dashboard/delete/:id', async (req, res) => {
   await doc.loadInfo();
   const rows = await sheet.getRows();
   rows.forEach(async row => {
@@ -86,7 +93,31 @@ app.get('/delete/:id', async (req, res) => {
     return;
   })
   // await row.delete();
-  res.redirect('/');
+  res.redirect('/dashboard');
+})
+
+// products page 
+app.get('/products', async (req, res) => {
+  const rowss = await getData();
+  const products = rowss.reverse();
+  res.render('products', {products});
+})
+
+// about page
+app.get('/about', (req, res) => {
+  res.render('about');
+})
+
+// single product page
+app.get('/electric-online/:id', async (req, res) => {
+  const products = await getData();
+  const product = products.find(product => product.get('id') == req.params.id);
+  res.render('product', { product, products });
+})
+
+// 404 page
+app.get('*', (req, res) => {
+  res.render('404');
 })
 
 app.listen(PORT, () => {
