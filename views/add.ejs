@@ -57,14 +57,14 @@
 
       <label for="category">Category</label>
       <input type="text" id="category" name="category" class="form-control"><br>
-      <!-- <input type="text" name="imgUrl" class="form-control" id="imgUrl"> -->
+      <input type="text" name="image" class="form-control d-none" id="imgUrl">
       <div class="d-flex flex-column align-items-center justify-content-center">
         <img id="showImg" width="300" height="300" class="img-fluid rounded-2 border "
           src="https://cdn.pixabay.com/photo/2016/03/21/20/05/image-1271454_640.png" alt="img">
         <label for="image" class="btn w-50 my-4 py-2 text-white rounded-5 text-center bg-danger">Upload Photo</label>
       </div>
 
-      <input type="file" id="image" name="image" accept="image/*" class="form-control d-none"><br>
+      <input type="file" id="image" name="imgUrl" accept="image/*" class="form-control d-none"><br>
 
       <input type="submit" class="btn btn-success px-5 py-2" value="Submit">
     </form>
@@ -84,9 +84,10 @@
 
     uploadImg.onchange = function () {
       let showImg = document.getElementById('showImg').src = URL.createObjectURL(uploadImg.files[0]);
+      document.querySelector('#imgUrl').value = showImg;
     }
 
-    form[6].addEventListener('click', function () {
+    form[7].addEventListener('click', function () {
       let sppiner = document.querySelector('#spinner');
       if(form[1].value != "" && form[3].value != ""){
         sppiner.classList.remove('d-none');

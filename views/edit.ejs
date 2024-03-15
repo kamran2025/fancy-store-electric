@@ -41,7 +41,7 @@
     style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5);"
     class="d-none d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-light" role="status" style="width: 50px; height: 50px;">
-  </div>
+    </div>
   </div>
   <!-- Loader end-->
   <h2 class="text-center mb-4">Edit Product</h2>
@@ -86,9 +86,11 @@
 
     productId.value = new Date().toISOString();
 
+
+
     uploadImg.onchange = function () {
-      let image = document.getElementById('image').value = uploadImg.files[0].name;
-      document.getElementById('showImg').src = uploadImg.files[0].name;
+      let image = document.getElementById('image').value = URL.createObjectURL(uploadImg.files[0]);
+      document.getElementById('showImg').src = image;
     }
 
     form[7].addEventListener('click', function () {
