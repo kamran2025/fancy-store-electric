@@ -83,7 +83,7 @@
     productId.value = new Date().toISOString();
 
     uploadImg.onchange = function () {
-      let showImg = document.getElementById('showImg').src = uploadImg.files[0];
+      let showImg = document.getElementById('showImg').src = URL.createObjectURL(uploadImg.files[0]);
     }
 
     form[6].addEventListener('click', function () {
