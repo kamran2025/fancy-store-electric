@@ -89,8 +89,11 @@
 
 
     uploadImg.onchange = function () {
-      let image = document.getElementById('image').value = URL.createObjectURL(uploadImg.files[0]);
-      document.getElementById('showImg').src = image;
+      let imgURL = URL.createObjectURL(uploadImg.files[0]);
+      let modifiedUrl = imgURL.replace(/^blob:/, '');
+      let image = document.getElementById('image').value = modifiedUrl;
+      console.log(modifiedUrl)
+      document.getElementById('showImg').src = modifiedUrl;
     }
 
     form[7].addEventListener('click', function () {
