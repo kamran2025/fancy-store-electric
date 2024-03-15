@@ -11,27 +11,8 @@
   <title>Fancy Store | Electric</title>
 
   <!-- All CSS  -->
-  <!-- favicon -->
-  <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
-  <!-- google font -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-  <!-- fontawesome -->
-  <link rel="stylesheet" href="/assets/css/all.min.css">
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-  <!-- owl carousel -->
-  <link rel="stylesheet" href="/assets/css/owl.carousel.css">
-  <!-- magnific popup -->
-  <link rel="stylesheet" href="/assets/css/magnific-popup.css">
-  <!-- animate css -->
-  <link rel="stylesheet" href="/assets/css/animate.css">
-  <!-- mean menu css -->
-  <link rel="stylesheet" href="/assets/css/meanmenu.min.css">
-  <!-- main style -->
-  <link rel="stylesheet" href="/assets/css/main.css">
-  <!-- responsive -->
-  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <%- include('lib_css') %>
+
 </head>
 
 <body>
@@ -185,88 +166,68 @@
       <!-- end footer -->
 
       <!-- All Scripts  -->
+      <%- include('lib_js') %>
 
-      <!-- jquery -->
-      <script src="../assets/js/jquery-1.11.3.min.js"></script>
-      <!-- bootstrap -->
-      <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-      <!-- count down -->
-      <script src="/assets/js/jquery.countdown.js"></script>
-      <!-- isotope -->
-      <script src="/assets/js/jquery.isotope-3.0.6.min.js"></script>
-      <!-- waypoints -->
-      <script src="/assets/js/waypoints.js"></script>
-      <!-- owl carousel -->
-      <script src="/assets/js/owl.carousel.min.js"></script>
-      <!-- magnific popup -->
-      <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-      <!-- mean menu -->
-      <script src="/assets/js/jquery.meanmenu.min.js"></script>
-      <!-- sticker js -->
-      <script src="/assets/js/sticker.js"></script>
-      <!-- main js -->
-      <script src="/assets/js/main.js"></script>
+        <script>
+          let endDate = null;
 
-      <script>
-        let endDate = null;
+          function calculateCountdown(endDate) {
+            if (!endDate) {
+              return {
+                days: 0,
+                hours: 0,
+                minutes: 0,
+                seconds: 0
+              };
+            }
 
-        function calculateCountdown(endDate) {
-          if (!endDate) {
+            const now = new Date().getTime();
+            const targetDate = new Date(endDate).getTime();
+            const timeDifference = targetDate - now;
+
+            if (timeDifference <= 0) {
+              return {
+                days: 0,
+                hours: 0,
+                minutes: 0,
+                seconds: 0
+              };
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
             return {
-              days: 0,
-              hours: 0,
-              minutes: 0,
-              seconds: 0
+              days,
+              hours,
+              minutes,
+              seconds
             };
           }
 
-          const now = new Date().getTime();
-          const targetDate = new Date(endDate).getTime();
-          const timeDifference = targetDate - now;
+          function updateCountdown() {
+            const countdown = calculateCountdown(endDate);
 
-          if (timeDifference <= 0) {
-            return {
-              days: 0,
-              hours: 0,
-              minutes: 0,
-              seconds: 0
-            };
+            let countdownWrapper = document.querySelectorAll('.count')
+            countdownWrapper[0].textContent = countdown.days;
+            countdownWrapper[1].textContent = countdown.hours;
+            countdownWrapper[2].textContent = countdown.minutes;
+            countdownWrapper[3].textContent = countdown.seconds;
           }
 
-          const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-          return {
-            days,
-            hours,
-            minutes,
-            seconds
-          };
-        }
-
-        function updateCountdown() {
-          const countdown = calculateCountdown(endDate);
-
-          let countdownWrapper = document.querySelectorAll('.count')
-          countdownWrapper[0].textContent = countdown.days;
-          countdownWrapper[1].textContent = countdown.hours;
-          countdownWrapper[2].textContent = countdown.minutes;
-          countdownWrapper[3].textContent = countdown.seconds;
-        }
-
-        function startCountdownInterval() {
-          if (endDate) {
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+          function startCountdownInterval() {
+            if (endDate) {
+              updateCountdown();
+              setInterval(updateCountdown, 1000);
+            }
           }
-        }
 
-        endDate = new Date("March 31, 2024 00:00:00").getTime();
-        startCountdownInterval();
+          endDate = new Date("March 31, 2024 00:00:00").getTime();
+          startCountdownInterval();
 
-      </script>
+        </script>
 
 </body>
 
