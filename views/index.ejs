@@ -168,9 +168,19 @@
       <!-- All Scripts  -->
       <%- include('lib_js') %>
 
-        <!-- <script>
+        <script>
           let endDate = null;
+
           function calculateCountdown(endDate) {
+            if (!endDate) {
+              return {
+                days: 0,
+                hours: 0,
+                minutes: 0,
+                seconds: 0
+              };
+            }
+
             const now = new Date().getTime();
             const targetDate = new Date(endDate).getTime();
             const timeDifference = targetDate - now;
@@ -198,7 +208,6 @@
           }
 
           function updateCountdown() {
-            const endDate = new Date("March 31, 2024 00:00:00").getTime(); 
             const countdown = calculateCountdown(endDate);
 
             let countdownWrapper = document.querySelectorAll('.count')
@@ -206,11 +215,19 @@
             countdownWrapper[1].textContent = countdown.hours;
             countdownWrapper[2].textContent = countdown.minutes;
             countdownWrapper[3].textContent = countdown.seconds;
-            setInterval(updateCountdown, 1000);
           }
-            updateCountdown();
 
-        </script> -->
+          function startCountdownInterval() {
+            if (endDate) {
+              updateCountdown();
+              setInterval(updateCountdown, 1000);
+            }
+          }
+
+          endDate = new Date("March 31, 2024 00:00:00").getTime();
+          startCountdownInterval();
+
+        </script>
 
 </body>
 

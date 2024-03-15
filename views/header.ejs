@@ -15,7 +15,7 @@
           <!-- menu start -->
           <nav class="main-menu">
             <ul>
-              <li class="current-list-item"><a href="#">Home</a>
+              <li class="current-list-item"><a href="/">Home</a>
               </li>
               <li><a href="/products">Products</a>
               </li>
@@ -23,12 +23,12 @@
               <li><a href="https://wa.me/+917044012863">Contact</a></li>
               <li>
                 <div class="header-icons">
-                  <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                  <a class="mobile-hide search-bar-icon"><i class="fas fa-search"></i></a>
                 </div>
               </li>
             </ul>
           </nav>
-          <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+          <a class="mobile-show search-bar-icon"><i class="fas fa-search"></i></a>
           <div class="mobile-menu"></div>
           <!-- menu end -->
         </div>
@@ -47,8 +47,11 @@
         <div class="search-bar">
           <div class="search-bar-tablecell">
             <h3>Search For:</h3>
-            <input type="text" placeholder="Keywords" style="font-size: 22px;">
-            <button type="submit">Search <i class="fas fa-search"></i></button>
+            <form action="/search" method="post">
+              <input type="text" name="query" placeholder="Keywords">
+              <button type="submit">Search <i class="fas fa-search"></i>
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -56,3 +59,17 @@
   </div>
 </div>
 <!-- end search area -->
+
+<script>
+
+  let searchForm = document.querySelector('form');
+  searchForm[1].setAttribute('type', 'button');
+  searchForm[0].addEventListener('input', function () {
+    if(this.value.length >= 1) {
+      searchForm[1].setAttribute('type', 'submit')
+    } else {
+      searchForm[1].setAttribute('type', 'button')
+    }
+  })
+
+</script>

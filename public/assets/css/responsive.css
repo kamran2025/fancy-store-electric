@@ -474,7 +474,8 @@
   }
 
   .search-bar-tablecell input {
-    font-size: 20px;
+    width: 100%;
+    font-size: 16px;
   }
 
   .header-icons {
@@ -653,8 +654,13 @@
 
 @media (max-width: 768px) {
   .hero-lamp-img {
-    top: 7%;
-    right: 13% !important;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-area {
+    padding-left: 0;
   }
 
   .hero-area div {

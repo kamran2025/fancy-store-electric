@@ -43,6 +43,20 @@ app.get('/', async (req, res) => {
   res.render('index', { products });
 })
 
+// search page 
+app.post('/search',async (req, res) => {
+  const query = req.body.query; 
+  res.redirect(`/search-results?query=${encodeURIComponent(query)}`);
+});
+
+app.get('/search-results', async (req, res) => {
+  const products = await getData();
+  const query = req.query.query;
+  const results = products.filter(product => product.get('title').toLowerCase().includes(query.toLowerCase()) || product.get('category').toLowerCase().includes(query.toLowerCase()) || product.get('price').toLowerCase().includes(query.toLowerCase()) || product.get('description').toLowerCase().includes(query.toLowerCase()));
+  if(results.length === 0) return res.redirect('404')
+  res.render('search', { query, results });
+})
+
 // Render home page with data
 app.get('/dashboard', async (req, res) => {
   const rowss = await getData();
@@ -109,7 +123,7 @@ app.get('/about', (req, res) => {
 })
 
 // single product page
-app.get('/electric-online/:id', async (req, res) => {
+app.get('/:title/:id', async (req, res) => {
   const products = await getData();
   const product = products.find(product => product.get('id') == req.params.id);
   res.render('product', { product, products });
@@ -123,6 +137,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 })
-
-
 

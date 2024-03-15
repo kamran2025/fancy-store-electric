@@ -467,23 +467,9 @@ a.boxed-btn, a.bordered-btn, a.cart-btn {
   background-image: url(../img/breadcrumb-bg.jpg);
 }
 
-.breadcrumb-text p {
-  color: #F28123;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 7px;
-}
-
-.breadcrumb-text h1 {
-  font-size: 40px;
-  font-weight: 900;
-  color: #fff;
-  margin: 0;
-  margin-top: 20px;
-}
 
 .breadcrumb-section {
-  padding: 200px 0 150px 0;
+  padding: 45px 0;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -516,7 +502,7 @@ ul.navbar-nav li.nav-item a.nav-link, ul.navbar-nav li.nav-item.active a.nav-lin
   position: absolute;
   z-index: 999;
   width: 100%;
-  padding: 25px 0;
+  padding: 15px 0;
 }
 
 .top-header-area.white ul.navbar-nav li.nav-item a.nav-link, .top-header-area.white ul.navbar-nav li.nav-item.active a.nav-link {
@@ -783,14 +769,15 @@ a.mobile-show {
   display: block;
   margin: 0 auto;
   text-align: center;
-  font-size: 50px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
   margin-bottom: 40px;
   color: #fff;
 }
 
-.search-bar-tablecell button[type=submit] {
+.search-bar-tablecell button {
   border: none;
+  color: #fff;
   background-color: #F28123;
   padding: 15px 30px;
   cursor: pointer;
@@ -1762,7 +1749,7 @@ ul.social-link-team li a {
 
 ----------------------------------------------------------------------------- */
 .product-filters {
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 .product-filters ul {
@@ -1775,16 +1762,28 @@ ul.social-link-team li a {
 .product-filters ul li {
   display: inline-block;
   font-weight: 700;
-  font-size: 18px;
-  margin: 15px;
-  border: 2px solid #051922;
-  color: #323232;
-  cursor: pointer;
-  padding: 8px 20px;
-  border-radius: 25px;
+  font-size: 16px;
+  margin: 10px;
 }
 
-.product-filters ul li.active {
+.product-filters ul li a {
+  border: 2px solid #051922;
+  color: #323232;
+  border-radius: 25px;
+  padding: 8px 18px;
+}
+
+.product-filters ul li:first-child > a {
+  padding: 8px 25px;
+}
+
+.product-filters ul li a:hover {
+  border: 2px solid #F28123;
+  background-color: #F28123;
+  color: #fff;
+}
+
+.product-filters ul li a.active {
   border: 2px solid #F28123;
   background-color: #F28123;
   color: #fff;
@@ -1876,14 +1875,6 @@ p.single-product-pricing span {
   margin-bottom: 10px;
   color: #051922;
   line-height: inherit;
-}
-
-input[type="number"] {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  width: 100px;
-  margin-bottom: 15px;
 }
 
 .single-product-form a.cart-btn {

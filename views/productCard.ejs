@@ -1,12 +1,12 @@
-
 <div class="row">
   <% products.forEach(product=> { %>
     <div class="col-lg-4 col-md-6 text-center">
       <div class="single-product-item">
         <div class="product-image">
-          <a href="electric-online/<%= product.get('id') %>">
-            <img src="<%= product.get('image') %>" alt="img">
-          </a>
+          <% let prodcutTitle=product.get('title').replace(/\s+/g, '-' ).toLowerCase(); %>
+            <a href="<%= prodcutTitle %>/<%= product.get('id') %>">
+              <img src="<%= product.get('image') %>" alt="img">
+            </a>
         </div>
         <h3>
           <%= product.get('title') %>
@@ -19,5 +19,4 @@
       </div>
     </div>
     <% }) %>
-
 </div>
