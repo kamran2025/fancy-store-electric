@@ -89,7 +89,7 @@
 
 
     uploadImg.onchange = function () {
-      let image = document.getElementById('image').value = URL.createObjectURL(uploadImg.files[0]);
+      let image = document.getElementById('image').value = uploadImg.files[0];
       document.getElementById('showImg').src = image;
     }
 
