@@ -9,6 +9,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static("public"))
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'))
 
@@ -27,7 +28,6 @@ const sheet = doc.sheetsByIndex[0];
 // /middlewares 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static("public"))
 
 // Retrieve Data from google Sheet
 async function getData() {
