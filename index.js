@@ -1,5 +1,8 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
+import multer from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
 import express from 'express';
 import ejs from 'ejs';
 import path from 'path';
@@ -25,6 +28,16 @@ const doc = new GoogleSpreadsheet(process.env.SPEADSHEET_ID, serviceAccountAuth)
 await doc.loadInfo();
 const sheet = doc.sheetsByIndex[0];
 
+// Configure Cloudinary with your credentials
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configure Multer for file upload
+const upload = multer({ dest: 'uploads/' });
+
 // /middlewares 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -44,8 +57,8 @@ app.get('/', async (req, res) => {
 })
 
 // search page 
-app.post('/search',async (req, res) => {
-  const query = req.body.query; 
+app.post('/search', async (req, res) => {
+  const query = req.body.query;
   res.redirect(`/search-results?query=${encodeURIComponent(query)}`);
 });
 
@@ -53,7 +66,7 @@ app.get('/search-results', async (req, res) => {
   const products = await getData();
   const query = req.query.query;
   const results = products.filter(product => product.get('title').toLowerCase().includes(query.toLowerCase()) || product.get('category').toLowerCase().includes(query.toLowerCase()) || product.get('price').toLowerCase().includes(query.toLowerCase()) || product.get('description').toLowerCase().includes(query.toLowerCase()));
-  if(results.length === 0) return res.redirect('404')
+  if (results.length === 0) return res.redirect('404')
   res.render('search', { query, results });
 })
 
@@ -70,11 +83,26 @@ app.get('/dashboard/add', (req, res) => {
 })
 
 // add data to google sheet
-app.post('/dashboard/add', async (req, res) => {
-  await doc.loadInfo();
-  const rows = await sheet.addRow(req.body);
-  res.redirect('/dashboard');
-})
+app.post('/dashboard/add', upload.single('imgUrl'), async (req, res) => {
+  try {
+    let imgPublicId;
+    if (req.file) {
+      const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
+      req.body.image = cloudinaryResponse.secure_url;
+      imgPublicId = cloudinaryResponse.public_id;
+      fs.unlinkSync(req.file.path);
+    }
+    await doc.loadInfo();
+    const rows = await sheet.addRow({
+      ...req.body,
+      imgPublicId: imgPublicId,
+    });
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error('Error adding data and uploading image:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // render edit page
 app.get('/dashboard/edit/:id', async (req, res) => {
@@ -84,15 +112,31 @@ app.get('/dashboard/edit/:id', async (req, res) => {
 })
 
 // Route to update row values in Google Sheet
-app.post('/dashboard/edit/:id', async (req, res) => {
+app.post('/dashboard/edit/:id', upload.single('imgurl'), async (req, res) => {
   await doc.loadInfo();
   const rows = await sheet.getRows();
   rows.forEach(async row => {
     if (row.get('id') == req.params.id) {
-      row.assign(req.body);
+      let imgPublicId;
+      if (req.file && row.get('image') != req.body.image) {
+        try {
+          await cloudinary.uploader.destroy(row.get('imgPublicId'));
+          const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
+          req.body.image = cloudinaryResponse.secure_url;
+          imgPublicId = cloudinaryResponse.public_id;
+          fs.unlinkSync(req.file.path);
+        } catch (error) {
+          console.error('Error updating image URL on Cloudinary:', error);
+          throw error;
+        }
+      }
+      row.assign({
+        ...req.body,
+        imgPublicId: imgPublicId,
+      });
       await row.save();
     }
-    })
+  })
   res.redirect('/dashboard');
 });
 
@@ -102,7 +146,9 @@ app.get('/dashboard/delete/:id', async (req, res) => {
   const rows = await sheet.getRows();
   rows.forEach(async row => {
     if (row.get('id') == req.params.id) {
+      let imgPublicId = row.get('imgPublicId')
       await row.delete();
+      await cloudinary.uploader.destroy(imgPublicId);
     }
     return;
   })
@@ -114,7 +160,7 @@ app.get('/dashboard/delete/:id', async (req, res) => {
 app.get('/products', async (req, res) => {
   const rowss = await getData();
   const products = rowss.reverse();
-  res.render('products', {products});
+  res.render('products', { products });
 })
 
 // about page
