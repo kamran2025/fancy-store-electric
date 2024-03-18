@@ -2,7 +2,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
-import fs from 'fs';
+// import fs from 'fs';
 import express from 'express';
 import ejs from 'ejs';
 import path from 'path';
@@ -90,7 +90,7 @@ app.post('/dashboard/add', upload.single('imgUrl'), async (req, res) => {
       const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
       req.body.image = cloudinaryResponse.secure_url;
       imgPublicId = cloudinaryResponse.public_id;
-      fs.unlinkSync(req.file.path);
+      // fs.unlinkSync(req.file.path);
     }
     await doc.loadInfo();
     const rows = await sheet.addRow({
@@ -124,7 +124,7 @@ app.post('/dashboard/edit/:id', upload.single('imgurl'), async (req, res) => {
           const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
           req.body.image = cloudinaryResponse.secure_url;
           imgPublicId = cloudinaryResponse.public_id;
-          fs.unlinkSync(req.file.path);
+          // fs.unlinkSync(req.file.path);
         } catch (error) {
           console.error('Error updating image URL on Cloudinary:', error);
           throw error;
