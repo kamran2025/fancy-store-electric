@@ -38,7 +38,7 @@
 <body>
   <!-- Loader -->
   <div id="spinner"
-    style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5);"
+    style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 9999;"
     class="d-none d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-light" role="status" style="width: 50px; height: 50px;">
     </div>
@@ -62,14 +62,18 @@
         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Advance Options
         </button>
-        <ul class="dropdown-menu w-100 border-0" style="text-align: left;">
-          <li class="">
+        <ul class="dropdown-menu border-0 position-static py-0 mb-5" style="text-align: left;">
+          <li>
             <label for="discountedPrice">Discounted Price [Optional]</label>
             <input type="number" id="discountedPrice" name="discountedPrice" step="0.01" class="form-control"><br>
           </li>
           <li>
             <label class="text-secondary">Discount in Percent</label>
             <input type="text" id="discountedPercent" name="discountedPercent" class="form-control " readonly><br>
+          </li>
+          <li>
+            <label>Discount End Date</label>
+            <input type="date" id="endDate" name="endDate" class="form-control "><br>
           </li>
         </ul>
       </div>
@@ -80,10 +84,11 @@
       <div class="d-flex flex-column align-items-center justify-content-center">
         <img id="showImg" width="300" height="300" class="img-fluid rounded-2 border "
           src="https://cdn.pixabay.com/photo/2016/03/21/20/05/image-1271454_640.png" alt="img">
+          <p class="tooltipImg d-none mt-1 py-1 px-4 rounded text-danger mb-0">Image is required!</p>
         <label for="image" class="btn w-50 my-4 py-2 text-white rounded-5 text-center bg-danger">Upload Photo</label>
       </div>
 
-      <input type="file" id="image" name="imgUrl" accept="image/*" class="form-control d-none"><br>
+      <input type="file" id="image" name="imgUrl" accept="image/*" class="form-control d-none" required><br>
 
       <input type="submit" class="btn btn-success px-5 py-2" value="Submit">
     </form>
@@ -106,10 +111,18 @@
       document.querySelector('#imgUrl').value = uploadImg.files[0].name;
     }
 
-    form[10].addEventListener('click', function () {
+    form[11].addEventListener('click', function () {
       let sppiner = document.querySelector('#spinner');
-      if (form[1].value != "" && form[3].value != "") {
+      if (form[1].value != "" && form[3].value != "" && form[10].value != "") {
         sppiner.classList.remove('d-none');
+      }
+      else if (!form[10].value ) {
+        document.querySelector('.tooltipImg').classList.remove('d-none')
+      }
+    })
+    form[10].addEventListener('input', function () {
+      if(this.value) {
+        document.querySelector('.tooltipImg').classList.add('d-none')
       }
     })
 

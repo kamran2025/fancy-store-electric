@@ -38,7 +38,7 @@
 <body>
   <!-- Loader -->
   <div id="spinner"
-    style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5);"
+    style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 9999;"
     class="d-none d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-light" role="status" style="width: 50px; height: 50px;">
     </div>
@@ -59,15 +59,30 @@
       <input type="number" id="price" name="price" step="0.01" class="form-control" value="<%= row.get('price') %>"
         required><br>
 
-      <label for="discountedPrice">Discounted Price [Optional]</label>
-      <input type="number" id="discountedPrice" name="discountedPrice" value="<%= row.get('discountedPrice') %>" step="0.01" class="form-control"><br>
-
-      <label class="text-secondary">Discount in Percent</label>
-      <input type="text" id="discountedPercent" name="discountedPercent" value="<%= row.get('discountedPercent') %>" class="form-control " readonly><br>
+      <div class="dropdown mb-3">
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Advance Options
+        </button>
+        <ul class="dropdown-menu border-0 position-static py-0 mb-5" style="text-align: left;">
+          <li class="">
+            <label for="discountedPrice">Discounted Price [Optional]</label>
+            <input type="number" id="discountedPrice" name="discountedPrice" value="<%= row.get('discountedPrice') %>"
+              step="0.01" class="form-control"><br>
+          </li>
+          <li>
+            <label class="text-secondary">Discount in Percent</label>
+            <input type="text" id="discountedPercent" name="discountedPercent"
+              value="<%= row.get('discountedPercent') %>" class="form-control " readonly><br>
+          </li>
+          <li>
+            <label>Discount End Date</label>
+            <input type="date" id="endDate" name="endDate" value="<%= row.get('endDate') %>" class="form-control "><br>
+          </li>
+        </ul>
+      </div>
 
       <label for="category">Category</label>
-      <input type="text" id="category" name="category" class="form-control" value="<%= row.get('category') %>"
-        required><br>
+      <input type="text" id="category" name="category" class="form-control" value="<%= row.get('category') %>"><br>
       <div class="d-flex flex-column align-items-center justify-content-center">
         <img id="showImg" width="300" height="300" class="img-fluid rounded-2 border " src="<%= row.get('image') %>"
           alt="img">
@@ -97,7 +112,7 @@
       document.getElementById('showImg').src = image;
     }
 
-    form[7].addEventListener('click', function () {
+    form[11].addEventListener('click', function () {
       let sppiner = document.querySelector('#spinner');
       if (form[1].value != "" && form[3].value != "") {
         sppiner.classList.remove('d-none');

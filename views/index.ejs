@@ -114,7 +114,7 @@
 
     <!-- cart banner section -->
     <% products.forEach(product => { %>
-     <% if (product.get('discountedPercent')) { %>
+     <% if (product.get('discountedPercent') && product.get('endDate')) { %>
       
     <section class="cart-banner pt-100 pb-100">
       <div class="container">
@@ -129,7 +129,9 @@
                   </span>
                 </div>
               </div>
-              <img src="<%= product.get('image') %>" id="proImg" alt="img">
+              <a href="<%= product.get('title').replace(/\s+/g, '-' ).toLowerCase() %>/<%= product.get('id') %>">
+                <img src="<%= product.get('image') %>" id="proImg" alt="img">
+              </a>
             </div>
           </div>
           <!--Content Column-->
@@ -155,6 +157,7 @@
                 </div>
               </div>
             </div>
+            <p class="endDate d-none"><%= product.get('endDate') %></p>
             <a href="https://wa.me/+917044012863" class="cart-btn px-5 mt-3"> Contact</a>
           </div>
         </div>
@@ -163,7 +166,6 @@
     <% } %>
     <% }) %>
     <!-- end cart banner section -->
-
 
     <!-- footer -->
     <%- include('footer') %>
@@ -174,7 +176,6 @@
 
         <script>
           let proDiscPrsnt = document.querySelector('#proImg');
-          console.log(proDiscPrsnt)
 
           let endDate = null;
 
@@ -224,6 +225,7 @@
             countdownWrapper[3].textContent = countdown.seconds;
           }
 
+          let endDateValue = document.querySelector('.endDate').textContent;
           function startCountdownInterval() {
             if (endDate) {
               updateCountdown();
@@ -231,7 +233,7 @@
             }
           }
 
-          endDate = new Date("March 31, 2024 00:00:00").getTime();
+          endDate = new Date(endDateValue).getTime();
           startCountdownInterval();
 
         </script>

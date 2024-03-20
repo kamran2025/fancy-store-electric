@@ -148,7 +148,9 @@ app.get('/dashboard/delete/:id', async (req, res) => {
     if (row.get('id') == req.params.id) {
       let imgPublicId = row.get('imgPublicId')
       await row.delete();
-      await cloudinary.uploader.destroy(imgPublicId);
+      if(imgPublicId) {
+        await cloudinary.uploader.destroy(imgPublicId);
+      }
     }
     return;
   })
