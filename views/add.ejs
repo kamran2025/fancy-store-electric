@@ -37,14 +37,17 @@
 
 <body>
   <!-- Loader -->
-  <div id="spinner" style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5);" class="d-none d-flex align-items-center justify-content-center">
+  <div id="spinner"
+    style="width: 100%; min-height: 100vh; position: fixed; top: 0; background-color: rgba(0, 0, 0, 0.5);"
+    class="d-none d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-light" role="status" style="width: 50px; height: 50px;">
     </div>
   </div>
   <!-- Loader end-->
   <h2 class="text-center mb-4">Add Product</h2>
   <div class="d-flex align-items-center justify-content-center">
-    <form id="product-form" class="col-10 col-md-6 col-xl-4" action="/dashboard/add" method="post" enctype="multipart/form-data">
+    <form id="product-form" class="col-10 col-md-6 col-xl-4" action="/dashboard/add" method="post"
+      enctype="multipart/form-data">
       <input type="text" name="id" class="form-control d-none" id="productId">
       <label for="title">Title</label>
       <input type="text" id="title" name="title" class="form-control" required><br>
@@ -54,6 +57,22 @@
 
       <label for="price">Price</label>
       <input type="number" id="price" name="price" step="0.01" class="form-control" required><br>
+
+      <div class="dropdown mb-3">
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Advance Options
+        </button>
+        <ul class="dropdown-menu w-100 border-0" style="text-align: left;">
+          <li class="">
+            <label for="discountedPrice">Discounted Price [Optional]</label>
+            <input type="number" id="discountedPrice" name="discountedPrice" step="0.01" class="form-control"><br>
+          </li>
+          <li>
+            <label class="text-secondary">Discount in Percent</label>
+            <input type="text" id="discountedPercent" name="discountedPercent" class="form-control " readonly><br>
+          </li>
+        </ul>
+      </div>
 
       <label for="category">Category</label>
       <input type="text" id="category" name="category" class="form-control"><br>
@@ -87,12 +106,30 @@
       document.querySelector('#imgUrl').value = uploadImg.files[0].name;
     }
 
-    form[7].addEventListener('click', function () {
+    form[10].addEventListener('click', function () {
       let sppiner = document.querySelector('#spinner');
-      if(form[1].value != "" && form[3].value != ""){
+      if (form[1].value != "" && form[3].value != "") {
         sppiner.classList.remove('d-none');
       }
     })
+
+    const originalPriceInput = document.getElementById('price');
+    const discountedPriceInput = document.getElementById('discountedPrice');
+    const discountPercentageInput = document.getElementById('discountedPercent');
+
+    discountedPriceInput.addEventListener('input', function () {
+      const originalPrice = parseFloat(originalPriceInput.value);
+      const discountedPrice = parseFloat(discountedPriceInput.value);
+
+      if (!isNaN(originalPrice) && !isNaN(discountedPrice) && originalPrice !== 0) {
+        const discountPercentage = Math.floor((discountedPrice / originalPrice) * 100);
+        discountPercentageInput.value = discountPercentage + '%';
+      } else {
+        discountPercentageInput.value = '';
+      }
+    });
+
+
 
   </script>
 </body>

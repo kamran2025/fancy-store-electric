@@ -113,6 +113,9 @@
     <!-- end product section -->
 
     <!-- cart banner section -->
+    <% products.forEach(product => { %>
+     <% if (product.get('discountedPercent')) { %>
+      
     <section class="cart-banner pt-100 pb-100">
       <div class="container">
         <div class="row clearfix">
@@ -122,19 +125,18 @@
               <div class="price-box">
                 <div class="inner-price">
                   <span class="price">
-                    <strong>30% <br> off</strong>
+                    <strong> <%= product.get('discountedPercent') %> <br> off</strong>
                   </span>
                 </div>
               </div>
-              <img src="https://res.cloudinary.com/db31b5psx/image/upload/v1710168657/2108_sr3u2k.jpg" alt="img">
+              <img src="<%= product.get('image') %>" id="proImg" alt="img">
             </div>
           </div>
           <!--Content Column-->
           <div class="content-column col-lg-6">
             <h3><span class="orange-text">Deal</span> of the month</h3>
-            <h4>New Trending lamp</h4>
-            <div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique! Beatae,
-              minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem accusant
+            <h4><%= product.get('title') %></h4>
+            <div class="text"><%= product.get('description') %>
             </div>
             <!--Countdown Timer-->
             <div class="time-counter">
@@ -158,6 +160,8 @@
         </div>
       </div>
     </section>
+    <% } %>
+    <% }) %>
     <!-- end cart banner section -->
 
 
@@ -169,6 +173,9 @@
       <%- include('lib_js') %>
 
         <script>
+          let proDiscPrsnt = document.querySelector('#proImg');
+          console.log(proDiscPrsnt)
+
           let endDate = null;
 
           function calculateCountdown(endDate) {
