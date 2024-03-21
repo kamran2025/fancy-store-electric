@@ -131,7 +131,16 @@ app.post('/dashboard/edit/:id', upload.single('imgurl'), async (req, res) => {
       if (req.file && row.get('image') != req.body.image) {
         try {
           await cloudinary.uploader.destroy(row.get('imgPublicId'));
-          const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
+          const cloudinaryResponse = await new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream({ resource_type: 'image' }, (err, result) => {
+              if (err) {
+                console.log(err);
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            }).end(req.file.buffer);
+          });
           req.body.image = cloudinaryResponse.secure_url;
           imgPublicId = cloudinaryResponse.public_id;
         } catch (error) {
