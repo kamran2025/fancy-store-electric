@@ -36,7 +36,7 @@ cloudinary.config({
 });
 
 // Configure Multer for file upload
-const upload = multer({ dest: './public/tmp' });
+const upload = multer({ dest: './public/uploads' });
 
 // /middlewares 
 app.use(express.json())
