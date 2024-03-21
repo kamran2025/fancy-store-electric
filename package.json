@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node dist/app.js",
-    "build": "mkdir -p dist && cp -r public views app.js dist/"
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
