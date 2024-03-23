@@ -26,7 +26,7 @@ function isAdmin(req, res, next) {
    return next();
 
   } else {
-    return res.redirect('/'); 
+   res.redirect('/'); 
   }
 }
 
