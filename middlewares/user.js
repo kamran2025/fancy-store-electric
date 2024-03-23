@@ -1,14 +1,37 @@
-// import { GoogleSpreadsheet } from 'google-spreadsheet';
-// import { JWT } from 'google-auth-library';
-// import express from 'express';
-// import dotenv from 'dotenv';
-// dotenv.config();
+import { validateToken } from "../services/authentication.js";
+
+function isCookie(cookieName) {
+  return (req, res, next) => {
+    const tokenCookieValue = req.cookies[cookieName];
+
+    if(!tokenCookieValue) {
+      return next()
+    }
+
+    try {
+      const userPayload = validateToken(tokenCookieValue);
+      req.user = userPayload;
+    } catch (error) {
+      console.log(error)
+    }
+    return next();
+  }
+}
 
 
+function isAdmin(req, res, next) {
+  const userRole = req.user?.role; 
+
+  if (userRole === 'ADMIN') {
+   return next();
+
+  } else {
+    res.redirect('/'); 
+  }
+}
 
 
-// app.get('/dashboard', async (req, res) => {
-//   const rowss = await getData(productsData);
-//   const rows = rowss.reverse();
-//   res.render('dashboard', { rows });
-// })
+export {
+  isCookie,
+  isAdmin,
+}

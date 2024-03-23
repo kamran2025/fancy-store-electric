@@ -1,13 +1,16 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { JWT } from 'google-auth-library';
+import googleAuth from './googlAuth.js';
 import { v2 as cloudinary } from 'cloudinary';
 import express from 'express';
 import ejs from 'ejs';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import dashboardRouter from './routes/dashboard.js';
+import userRoutes from './routes/user.js';
+import dashboardRoutes from './routes/dashboard.js';
+import { isAdmin, isCookie } from './middlewares/user.js';
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,29 +19,14 @@ app.use(express.static(path.resolve("public")))
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'))
 
-const serviceAccountAuth = new JWT({
-  email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-  key: process.env.GOOGLE_PRIVATE_KEY,
-  scopes: [
-    'https://www.googleapis.com/auth/spreadsheets',
-  ],
-});
-
-const doc = new GoogleSpreadsheet(process.env.SPEADSHEET_ID, serviceAccountAuth);
-await doc.loadInfo();
-const productsData = doc.sheetsByIndex[0];
-const userData = doc.sheetsByIndex[1];
-
-// Configure Cloudinary with your credentials
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const { doc, productsData } = await googleAuth();
 
 // /middlewares 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+
+app.use(isCookie('token'))
 
 // Retrieve Data from google Sheet
 async function getData(sheetName) {
@@ -51,10 +39,11 @@ async function getData(sheetName) {
 app.get('/', async (req, res) => {
   const rowss = await getData(productsData);
   const products = rowss.reverse();
-  res.render('index', { products });
+  res.render('index', { products, user: req.user });
 })
 
-app.use('/dashboard', dashboardRouter);
+app.use('/user', userRoutes);
+app.use('/dashboard', isAdmin, dashboardRoutes);
 
 // search page 
 app.post('/search', async (req, res) => {

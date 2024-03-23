@@ -407,7 +407,7 @@
   }
 
   .feature-bg {
-    margin: 100px 0;
+    margin: 60px 0;
   }
 
   .margin-top-150p {
@@ -653,6 +653,7 @@
 }
 
 @media (max-width: 768px) {
+
   .hero-lamp-img {
     top: 10%;
     left: 50%;

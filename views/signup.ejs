@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+  <!-- title -->
+  <title>Fancy Store | Signup</title>
+
+  <!-- All CSS  -->
+  <%- include('lib_css') %>
+
+</head>
+
+<body style="height: 100vh;">
+
+  <!--PreLoader-->
+  <div class="loader">
+    <div class="loader-inner">
+      <div class="circle"></div>
+    </div>
+  </div>
+  <!--PreLoader Ends-->
+
+  <!-- header -->
+  <nav class="navbar navbar-expand-lg bg-dark py-3">
+    <div class="container">
+      <div class="col-9 col-md-6 col-lg-4 px-0">
+        <a class="navbar-brand" href="/">
+          <img src="../assets/img/logo.png" class="w-75" alt="logo">
+        </a>
+      </div>
+      <div class="col-2">
+        <a href="/" class="px-2 py-1 text-warning" style=" font-size: 18px; font-weight: 700;">X</a>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <!-- end header -->
+
+  <!-- featured section -->
+  <h3 class="text-center mt-5 pt-5 fs-1">Signup</h3>
+  <div class="container h-50 d-flex align-items-center justify-content-center">
+    <form class="col-12 col-md-8 col-lg-6" action="/user/signup" method="post">
+      <div class="mb-2">
+        <label for="name" class="mb-0 text-dark" style="font-size: 16px; font-weight: 600;">Name</label>
+        <input type="text" id="name" name="name" class="form-control py-4" style="font-weight: 500; font-size: 15px; color: black;" required><br>
+      </div>
+      <div class="mb-2">
+        <label for="email" class="mb-0 text-dark" style="font-size: 16px; font-weight: 600;">Email</label>
+        <input type="email" id="email" name="email" class="form-control py-4" style="font-weight: 500; font-size: 15px; color: black;" required><br>
+      </div>
+      <div class="mb-4">
+        <label for="exampleInputPassword1" class="mb-0 text-dark" style="font-size: 16px; font-weight: 600;">Password</label>
+        <input type="password" name="password" class="form-control py-4" style="font-weight: 500; font-size: 15px; color: black;" id="password" required>
+      </div>
+      <button type="submit" class="btn btn-success py-2 px-5 rounded-pill mt-3" style="font-size: 16px; font-weight: 600;">Submit</button>
+    </form>
+  </div>
+  <!-- end featured section -->
+
+  <!-- footer -->
+  <div class="col-12 text-center" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);">
+    <div>
+      <p>Copyrights &copy; 2024 - <a href="/">Fancy Store</a>, All Rights Reserved.
+      </p>
+    </div>
+  </div>
+  <!-- end footer -->
+
+  <%- include('lib_js') %>
+
+</body>
+
+</html>

@@ -1,5 +1,4 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { JWT } from 'google-auth-library';
+import googleAuth from '../googlAuth.js';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
 import express from 'express';
@@ -7,20 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const router = express.Router();
-
-
-const serviceAccountAuth = new JWT({
-  email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-  key: process.env.GOOGLE_PRIVATE_KEY,
-  scopes: [
-    'https://www.googleapis.com/auth/spreadsheets',
-  ],
-});
-
-const doc = new GoogleSpreadsheet(process.env.SPEADSHEET_ID, serviceAccountAuth);
-await doc.loadInfo();
-const productsData = doc.sheetsByIndex[0];
-const userData = doc.sheetsByIndex[1];
+const {doc, productsData} = await googleAuth();
 
 // Configure Cloudinary with your credentials
 cloudinary.config({

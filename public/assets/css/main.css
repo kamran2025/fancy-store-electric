@@ -530,7 +530,7 @@ nav.main-menu ul li a {
   font-weight: 500;
   display: block;
   padding: 15px;
-  font-size: 18px !important;
+  font-size: 16px !important;
 }
 
 nav.main-menu ul > li {
@@ -1530,7 +1530,7 @@ div.owl-controls, .owl-controls div {
 ----------------------------------------------------------------------------- */
 .feature-bg {
   position: relative;
-  margin: 150px 0;
+  margin: 80px 0;
 }
 
 .feature-bg:after {
@@ -1552,26 +1552,6 @@ div.owl-controls, .owl-controls div {
 
 .team-bg-1 {
   background-image: url(../img/team/team-1.jpg);
-}
-
-.team-bg-2 {
-  background-image: url(../img/team/team-2.jpg);
-}
-
-.team-bg-3 {
-  background-image: url(../img/team/team-3.jpg);
-}
-
-.team-bg-4 {
-  background-image: url(../img/team/team-4.jpg);
-}
-
-.team-bg {
-  height: 400px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 5px;
-  background-color: #ddd;
 }
 
 .single-team-item {

@@ -1,6 +1,6 @@
 <!-- header -->
 <div class="top-header-area" id="sticker">
-  <div class="container-lg ">
+  <div class="container-lg">
     <div class="row">
       <div class="col-lg-12 col-sm-12 text-center">
         <div class="main-menu-wrap">
@@ -20,12 +20,32 @@
               <li><a href="/products">Products</a>
               </li>
               <li><a href="/about">About</a></li>
-              <li><a href="https://wa.me/+917044012863">Contact</a></li>
-              <li>
-                <div class="header-icons">
-                  <a class="mobile-hide search-bar-icon"><i class="fas fa-search"></i></a>
-                </div>
-              </li>
+
+              <% if (locals.user) { %>
+                <li>
+                  <a href="/user/logout"
+                    class="btn btn-danger py-2 px-4 rounded-pill text-center text-white"
+                    style="width: fit-content; margin-left: 15px;">Logout</a>
+                </li>
+                <% } else { %>
+                  <li>
+                    <a href="/user/login" class="btn btn-success py-2 px-4 mb-4 rounded-pill text-center text-white"
+                      style="width: fit-content; margin-left: 15px;">Login</a>
+                  </li>
+                  <li>
+                    <a href="/user/signup" class="btn btn-warning py-2 px-4 rounded-pill text-dark"
+                      style="width: fit-content; margin-left: 15px; font-weight: 600;" onmouseover="this.style.backgroundColor='orange';">Signup</a>
+                  </li>
+                  <% } %>
+
+                    <li>
+                      <div class="header-icons">
+                        <a class="mobile-hide search-bar-icon">
+                          <i class="fas fa-search">
+                          </i>
+                        </a>
+                      </div>
+                    </li>
             </ul>
           </nav>
           <a class="mobile-show search-bar-icon"><i class="fas fa-search"></i></a>
@@ -65,7 +85,7 @@
   let searchForm = document.querySelector('form');
   searchForm[1].setAttribute('type', 'button');
   searchForm[0].addEventListener('input', function () {
-    if(this.value.length >= 1) {
+    if (this.value.length >= 1) {
       searchForm[1].setAttribute('type', 'submit')
     } else {
       searchForm[1].setAttribute('type', 'button')
