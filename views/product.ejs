@@ -232,6 +232,9 @@
 
         <script>
 
+          const orderNowBtn = document.querySelector('.single-product-content a');
+          orderNowBtn.href = "https://wa.me/+918902479618?text=" + encodeURIComponent(orderNowBtn.baseURI);
+
           const shareButtons = document.querySelectorAll('.share-btn');
 
           shareButtons.forEach(function (button) {
