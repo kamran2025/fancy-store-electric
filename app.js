@@ -56,26 +56,26 @@ app.get('/search-results', async (req, res) => {
   const query = req.query.query;
   const results = products.filter(product => product.get('title').toLowerCase().includes(query.toLowerCase()) || product.get('category').toLowerCase().includes(query.toLowerCase()) || product.get('price').toLowerCase().includes(query.toLowerCase()) || product.get('description').toLowerCase().includes(query.toLowerCase()));
   if (results.length === 0) return res.redirect('404')
-  res.render('search', { query, results });
+  res.render('search', { query, results, user: req.user });
 })
 
 // products page 
 app.get('/products', async (req, res) => {
   const rowss = await getData(productsData);
   const products = rowss.reverse();
-  res.render('products', { products });
+  res.render('products', { products, user: req.user });
 })
 
 // about page
 app.get('/about', (req, res) => {
-  res.render('about');
+  res.render('about', {user: req.user});
 })
 
 // single product page
 app.get('/:title/:id', async (req, res) => {
   const products = await getData(productsData);
   const product = products.find(product => product.get('id') == req.params.id);
-  res.render('product', { product, products });
+  res.render('product', { product, products, user: req.user });
 })
 
 // 404 page

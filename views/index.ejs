@@ -8,10 +8,12 @@
   <meta name="description"
     content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
 
-    <meta property="og:title" content="Fancy Store Electric">
-    <meta property="og:description" content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
-    <meta property="og:image" content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
-    <meta property="og:url" content="https://fancy-store.vercel.app">
+  <meta property="og:title" content="Fancy Store Electric">
+  <meta property="og:description"
+    content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
+  <meta property="og:image"
+    content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
+  <meta property="og:url" content="https://fancy-store.vercel.app">
 
   <!-- title -->
   <title>Fancy Store | Electric</title>
@@ -119,130 +121,137 @@
     <!-- end product section -->
 
     <!-- cart banner section -->
-    <% products.forEach(product => { %>
-     <% if (product.get('discountedPercent') && product.get('endDate')) { %>
-      
-    <section class="cart-banner pt-100 pb-100">
-      <div class="container">
-        <div class="row clearfix">
-          <!--Image Column-->
-          <div class="image-column col-lg-6">
-            <div class="image">
-              <div class="price-box">
-                <div class="inner-price">
-                  <span class="price">
-                    <strong> <%= product.get('discountedPercent') %> <br> off</strong>
-                  </span>
+    <% products.forEach(product=> { %>
+      <% if (product.get('discountedPercent') && product.get('endDate')) { %>
+
+        <section class="cart-banner pt-100 pb-100">
+          <div class="container">
+            <div class="row clearfix">
+              <!--Image Column-->
+              <div class="image-column col-lg-6">
+                <div class="image">
+                  <div class="price-box">
+                    <div class="inner-price">
+                      <span class="price">
+                        <strong>
+                          <%= product.get('discountedPercent') %> <br> off
+                        </strong>
+                      </span>
+                    </div>
+                  </div>
+                  <a href="<%= product.get('title').replace(/\s+/g, '-' ).toLowerCase() %>/<%= product.get('id') %>">
+                    <img src="<%= product.get('image') %>" id="proImg" alt="img">
+                  </a>
                 </div>
               </div>
-              <a href="<%= product.get('title').replace(/\s+/g, '-' ).toLowerCase() %>/<%= product.get('id') %>">
-                <img src="<%= product.get('image') %>" id="proImg" alt="img">
-              </a>
-            </div>
-          </div>
-          <!--Content Column-->
-          <div class="content-column col-lg-6">
-            <h3><span class="orange-text">Deal</span> of the month</h3>
-            <h4><%= product.get('title') %></h4>
-            <div class="text"><%= product.get('description') %>
-            </div>
-            <!--Countdown Timer-->
-            <div class="time-counter">
-              <div class="time-countdown clearfix" data-countdown="2020/2/01">
-                <div class="counter-column">
-                  <div class="inner"><span class="count">00</span>Days</div>
+              <!--Content Column-->
+              <div class="content-column col-lg-6">
+                <h3><span class="orange-text">Deal</span> of the month</h3>
+                <h4>
+                  <%= product.get('title') %>
+                </h4>
+                <div class="text">
+                  <%= product.get('description') %>
                 </div>
-                <div class="counter-column">
-                  <div class="inner"><span class="count">00</span>Hours</div>
+                <!--Countdown Timer-->
+                <div class="time-counter">
+                  <div class="time-countdown clearfix" data-countdown="2020/2/01">
+                    <div class="counter-column">
+                      <div class="inner"><span class="count">00</span>Days</div>
+                    </div>
+                    <div class="counter-column">
+                      <div class="inner"><span class="count">00</span>Hours</div>
+                    </div>
+                    <div class="counter-column">
+                      <div class="inner"><span class="count">00</span>Mins</div>
+                    </div>
+                    <div class="counter-column">
+                      <div class="inner"><span class="count">00</span>Secs</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="counter-column">
-                  <div class="inner"><span class="count">00</span>Mins</div>
-                </div>
-                <div class="counter-column">
-                  <div class="inner"><span class="count">00</span>Secs</div>
-                </div>
+                <p class="endDate d-none">
+                  <%= product.get('endDate') %>
+                </p>
+                <a href="https://wa.me/+918902479618" class="cart-btn px-5 mt-3"> Contact</a>
               </div>
             </div>
-            <p class="endDate d-none"><%= product.get('endDate') %></p>
-            <a href="https://wa.me/+918902479618" class="cart-btn px-5 mt-3"> Contact</a>
           </div>
-        </div>
-      </div>
-    </section>
-    <% } %>
-    <% }) %>
-    <!-- end cart banner section -->
+        </section>
+        <% } %>
+          <% }) %>
+            <!-- end cart banner section -->
 
-    <!-- footer -->
-    <%- include('footer') %>
-      <!-- end footer -->
+            <!-- footer -->
+            <%- include('footer') %>
+              <!-- end footer -->
 
-      <!-- All Scripts  -->
-      <%- include('lib_js') %>
+              <!-- All Scripts  -->
+              <%- include('lib_js') %>
 
-        <script>
-          let proDiscPrsnt = document.querySelector('#proImg');
+                <script>
+                  let proDiscPrsnt = document.querySelector('#proImg');
 
-          let endDate = null;
+                  let endDate = null;
 
-          function calculateCountdown(endDate) {
-            if (!endDate) {
-              return {
-                days: 0,
-                hours: 0,
-                minutes: 0,
-                seconds: 0
-              };
-            }
+                  function calculateCountdown(endDate) {
+                    if (!endDate) {
+                      return {
+                        days: 0,
+                        hours: 0,
+                        minutes: 0,
+                        seconds: 0
+                      };
+                    }
 
-            const now = new Date().getTime();
-            const targetDate = new Date(endDate).getTime();
-            const timeDifference = targetDate - now;
+                    const now = new Date().getTime();
+                    const targetDate = new Date(endDate).getTime();
+                    const timeDifference = targetDate - now;
 
-            if (timeDifference <= 0) {
-              return {
-                days: 0,
-                hours: 0,
-                minutes: 0,
-                seconds: 0
-              };
-            }
+                    if (timeDifference <= 0) {
+                      return {
+                        days: 0,
+                        hours: 0,
+                        minutes: 0,
+                        seconds: 0
+                      };
+                    }
 
-            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+                    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            return {
-              days,
-              hours,
-              minutes,
-              seconds
-            };
-          }
+                    return {
+                      days,
+                      hours,
+                      minutes,
+                      seconds
+                    };
+                  }
 
-          function updateCountdown() {
-            const countdown = calculateCountdown(endDate);
+                  function updateCountdown() {
+                    const countdown = calculateCountdown(endDate);
 
-            let countdownWrapper = document.querySelectorAll('.count')
-            countdownWrapper[0].textContent = countdown.days;
-            countdownWrapper[1].textContent = countdown.hours;
-            countdownWrapper[2].textContent = countdown.minutes;
-            countdownWrapper[3].textContent = countdown.seconds;
-          }
+                    let countdownWrapper = document.querySelectorAll('.count')
+                    countdownWrapper[0].textContent = countdown.days;
+                    countdownWrapper[1].textContent = countdown.hours;
+                    countdownWrapper[2].textContent = countdown.minutes;
+                    countdownWrapper[3].textContent = countdown.seconds;
+                  }
 
-          let endDateValue = document.querySelector('.endDate').textContent;
-          function startCountdownInterval() {
-            if (endDate) {
-              updateCountdown();
-              setInterval(updateCountdown, 1000);
-            }
-          }
+                  let endDateValue = document.querySelector('.endDate').textContent;
+                  function startCountdownInterval() {
+                    if (endDate) {
+                      updateCountdown();
+                      setInterval(updateCountdown, 1000);
+                    }
+                  }
 
-          endDate = new Date(endDateValue).getTime();
-          startCountdownInterval();
+                  endDate = new Date(endDateValue).getTime();
+                  startCountdownInterval();
 
-        </script>
+                </script>
 
 </body>
 
