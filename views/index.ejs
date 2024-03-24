@@ -11,9 +11,13 @@
   <meta property="og:title" content="Fancy Store Electric">
   <meta property="og:description"
     content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
-  <meta property="og:image"
-    content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
   <meta property="og:url" content="https://fancy-store.vercel.app">
+
+  <meta property="og:image" content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg" />
+  <meta property="og:image:secure_url" content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="400" />
+  <meta property="og:image:height" content="300" />
 
   <!-- title -->
   <title>Fancy Store | Electric</title>
@@ -173,7 +177,8 @@
                 <p class="endDate d-none">
                   <%= product.get('endDate') %>
                 </p>
-                <a href="https://wa.me/+918902479618?text=I%20am%20interested%20in%20this%20product%0Ahttps://fancy-store.vercel.app/<%= product.get('title').replace(/\s+/g, '-' ).toLowerCase() %>/<%= product.get('id') %>" class="cart-btn px-5 mt-3">Order Now</a>
+                <a href="https://wa.me/+918902479618?text=I%20am%20interested%20in%20this%20product%0Ahttps://fancy-store.vercel.app/<%= product.get('title').replace(/\s+/g, '-' ).toLowerCase() %>/<%= product.get('id') %>"
+                  class="cart-btn px-5 mt-3">Order Now</a>
               </div>
             </div>
           </div>
