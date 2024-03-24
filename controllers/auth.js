@@ -10,6 +10,7 @@ async function getUserByEmailAndPasswordWithToken(email, password) {
     const getUser = allUsers.find(user => user.get('email') === email
       );
 
+    if(getUser) {
     const salt = getUser.get('salt');
     const userProvidedHash = createHmac('sha256', salt)
       .update(password)
@@ -19,6 +20,7 @@ async function getUserByEmailAndPasswordWithToken(email, password) {
 
       const token = createUserToken(user);
       return token;
+    }
 
   } catch (error) {
     console.error('Error fetching user:', error);

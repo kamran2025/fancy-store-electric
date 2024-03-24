@@ -8,12 +8,15 @@ const secret = process.env.PASSWORD_SECRET;
 
 function createUserToken(user) {
   try {
+    if(user) {
     const payload = {
       email: user.get('email'),
       role: user.get('role'),
     }
-    const token = JWT.sign(payload,secret);
+    const expiresIn = 4 * 60 * 60;
+    const token = JWT.sign(payload,secret, {expiresIn});
     return token;
+  }
   } catch (error) {
     console.log(error)
   }
