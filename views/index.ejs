@@ -173,7 +173,7 @@
                 <p class="endDate d-none">
                   <%= product.get('endDate') %>
                 </p>
-                <a href="https://wa.me/+918902479618" class="cart-btn px-5 mt-3"> Contact</a>
+                <a href="https://wa.me/+918902479618?text=I%20am%20interested%20in%20this%20product%0Ahttps://fancy-store.vercel.app/<%= product.get('title').replace(/\s+/g, '-' ).toLowerCase() %>/<%= product.get('id') %>" class="cart-btn px-5 mt-3">Order Now</a>
               </div>
             </div>
           </div>
