@@ -8,9 +8,9 @@
   <meta name="description"
     content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
 
+    <meta property="og:image" content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
     <meta property="og:title" content="Fancy Store Electric">
     <meta property="og:description" content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
-    <meta property="og:image" content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
     <meta property="og:url" content="https://fancy-store.vercel.app">
 
   <!-- title -->
@@ -66,6 +66,11 @@
             <div class="single-product-item">
               <div class="product-image">
                 <% let prodcutTitle=product.get('title').replace(/\s+/g, '-' ).toLowerCase(); %>
+                <div style="position: absolute; right: 25px; top: 7px; font-size: 16px;">
+                  <a href="https://api.whatsapp.com/send?text=https://fancy-store.vercel.app/<%= prodcutTitle %>/<%= product.get('id') %>" style=" color: #525252;" onmouseover="this.style.color='#F28123';" onmouseout="this.style.color='#525252';">
+                    <i class="fa fa-share-square"></i>
+                  </a>
+                </div>
                 <a href="<%= prodcutTitle %>/<%= product.get('id') %>">
                   <img src="<%= product.get('image') %>" alt="img">
                 </a>

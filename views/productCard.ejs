@@ -4,6 +4,11 @@
       <div class="single-product-item">
         <div class="product-image">
           <% let prodcutTitle=product.get('title').replace(/\s+/g, '-' ).toLowerCase(); %>
+          <div style="position: absolute; right: 25px; top: 7px; font-size: 16px;">
+            <a href="https://api.whatsapp.com/send?text=https://fancy-store.vercel.app/<%= prodcutTitle %>/<%= product.get('id') %>" style=" color: #525252;" onmouseover="this.style.color='#F28123';" onmouseout="this.style.color='#525252';">
+              <i class="fa fa-share-square"></i>
+            </a>
+          </div>
             <a href="<%= prodcutTitle %>/<%= product.get('id') %>">
               <img src="<%= product.get('image') %>" alt="img">
             </a>
