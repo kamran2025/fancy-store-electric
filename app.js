@@ -11,7 +11,6 @@ import userRoutes from './routes/user.js';
 import dashboardRoutes from './routes/dashboard.js';
 import { isAdmin, isCookie } from './middlewares/user.js';
 
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
