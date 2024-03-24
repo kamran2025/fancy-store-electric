@@ -82,6 +82,7 @@ app.get('*', (req, res) => {
   res.render('404');
 })
 
+// how to listen 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 })
