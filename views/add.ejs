@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
   <title>Add new product</title>
   <!--google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,7 +86,7 @@
       <div class="d-flex flex-column align-items-center justify-content-center">
         <img id="showImg" width="300" height="300" class="img-fluid rounded-2 border "
           src="https://cdn.pixabay.com/photo/2016/03/21/20/05/image-1271454_640.png" alt="img">
-          <p class="tooltipImg d-none mt-1 py-1 px-4 rounded text-danger mb-0">Image is required!</p>
+        <p class="tooltipImg d-none mt-1 py-1 px-4 rounded text-danger mb-0">Image is required!</p>
         <label for="image" class="btn w-50 my-4 py-2 text-white rounded-5 text-center bg-danger">Upload Photo</label>
       </div>
 
@@ -116,12 +118,12 @@
       if (form[1].value != "" && form[3].value != "" && form[10].value != "") {
         sppiner.classList.remove('d-none');
       }
-      else if (!form[10].value ) {
+      else if (!form[10].value) {
         document.querySelector('.tooltipImg').classList.remove('d-none')
       }
     })
     form[10].addEventListener('input', function () {
-      if(this.value) {
+      if (this.value) {
         document.querySelector('.tooltipImg').classList.add('d-none')
       }
     })
