@@ -7,10 +7,12 @@
   <meta name="description"
     content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
 
-    <meta property="og:title" content="Fancy Store Electric">
-    <meta property="og:description" content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
-    <meta property="og:image" content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
-    <meta property="og:url" content="https://fancy-store.vercel.app">
+  <meta property="og:title" content="Fancy Store Electric">
+  <meta property="og:description"
+    content="At Fancy Store Electric, we are passionate about providing our customers with top-quality electrical products and exceptional service. With years of experience in the industry, we have established ourselves as a trusted name in the market.">
+  <meta property="og:image"
+    content="https://res.cloudinary.com/db31b5psx/image/upload/v1710927860/ex56rmi3cwrbszposg9v.jpg">
+  <meta property="og:url" content="https://fancy-store.vercel.app">
 
   <!-- title -->
   <title>Fancy Store | Electric - Product</title>
@@ -73,15 +75,18 @@
               <h4>Share:</h4>
               <ul class="product-share">
                 <li>
-                  <span data-platform="facebook" class="share-btn btn" style="font-size: 16px;"><i class="fab fa-facebook-f"></i>
+                  <span data-platform="facebook" class="share-btn btn" style="font-size: 16px;"><i
+                      class="fab fa-facebook-f"></i>
                   </span>
                 </li>
                 <li>
-                  <span data-platform="whatsapp" class="share-btn btn" style="font-size: 18px;"><i class="fab fa-whatsapp"></i>
+                  <span data-platform="whatsapp" class="share-btn btn" style="font-size: 18px;"><i
+                      class="fab fa-whatsapp"></i>
                   </span>
                 </li>
                 <li>
-                  <span data-platform="instagram" class="share-btn btn" style="font-size: 18px;"><i class="fab fa-instagram"></i>
+                  <span data-platform="instagram" class="share-btn btn" style="font-size: 18px;"><i
+                      class="fab fa-instagram"></i>
                   </span>
                 </li>
               </ul>
@@ -109,23 +114,24 @@
         </div>
         <div class="row">
           <% let items=products.filter(item=> item.get('category') == product.get('category'));
-          let itemsTitle = [];
-          items.forEach(item => {
+            let itemsTitle = [];
+            items.forEach(item => {
             let itemTi = item.get('title').replace(/\s+/g, '-' ).toLowerCase();
             itemsTitle.push(itemTi);
-          });
-          let productTitles = [];
-          products.forEach(product => {
+            });
+            let productTitles = [];
+            products.forEach(product => {
             let proTitle = product.get('title').replace(/\s+/g, '-' ).toLowerCase();
             productTitles.push(proTitle)
-          });
+            });
             %>
 
             <% if (items.length> 2) { %>
               <div class="col-lg-4 col-md-6 text-center">
                 <div class="single-product-item">
                   <div class="product-image">
-                    <a href="/<%= itemsTitle[1] %>/<%= items[1].get('id') %>"><img src="<%= items[1].get('image') %>" alt="img"></a>
+                    <a href="/<%= itemsTitle[1] %>/<%= items[1].get('id') %>"><img src="<%= items[1].get('image') %>"
+                        alt="img"></a>
                   </div>
                   <h3>
                     <%= items[1].get('title') %>
@@ -140,7 +146,8 @@
               <div class="col-lg-4 col-md-6 text-center">
                 <div class="single-product-item">
                   <div class="product-image">
-                    <a href="/<%= itemsTitle[2] %>/<%= items[2].get('id') %>"><img src="<%= items[2].get('image') %>" alt=""></a>
+                    <a href="/<%= itemsTitle[2] %>/<%= items[2].get('id') %>"><img src="<%= items[2].get('image') %>"
+                        alt=""></a>
                   </div>
                   <h3>
                     <%= items[2].get('title') %>
@@ -155,7 +162,8 @@
               <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
                 <div class="single-product-item">
                   <div class="product-image">
-                    <a href="/<%= itemsTitle[3] %>/<%= items[3].get('id') %>"><img src="<%= items[3].get('image') %>" alt=""></a>
+                    <a href="/<%= itemsTitle[3] %>/<%= items[3].get('id') %>"><img src="<%= items[3].get('image') %>"
+                        alt=""></a>
                   </div>
                   <h3>
                     <%= items[3].get('title') %>
@@ -171,7 +179,8 @@
                 <div class="col-lg-4 col-md-6 text-center">
                   <div class="single-product-item">
                     <div class="product-image">
-                      <a href="/<%= productTitles[1] %>/<%= products[1].get('id') %>"><img src="<%= products[1].get('image') %>" alt="img"></a>
+                      <a href="/<%= productTitles[1] %>/<%= products[1].get('id') %>"><img
+                          src="<%= products[1].get('image') %>" alt="img"></a>
                     </div>
                     <h3>
                       <%= products[1].get('title') %>
@@ -186,7 +195,8 @@
                 <div class="col-lg-4 col-md-6 text-center">
                   <div class="single-product-item">
                     <div class="product-image">
-                      <a href="/<%= productTitles[2] %>/<%= products[2].get('id') %>"><img src="<%= products[2].get('image') %>" alt="img"></a>
+                      <a href="/<%= productTitles[2] %>/<%= products[2].get('id') %>"><img
+                          src="<%= products[2].get('image') %>" alt="img"></a>
                     </div>
                     <h3>
                       <%= products[2].get('title') %>
@@ -201,7 +211,8 @@
                 <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
                   <div class="single-product-item">
                     <div class="product-image">
-                      <a href="/<%= productTitles[3] %>/<%= products[3].get('id') %>"><img src="<%= products[3].get('image') %>" alt="img"></a>
+                      <a href="/<%= productTitles[3] %>/<%= products[3].get('id') %>"><img
+                          src="<%= products[3].get('image') %>" alt="img"></a>
                     </div>
                     <h3>
                       <%= products[3].get('title') %>
@@ -244,7 +255,7 @@
 
             switch (platform) {
               case 'whatsapp':
-                window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(url));
+                window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('<%= product.get("image") %>' + '\n' + '<%= product.get("title") %>' + '\n' + url));
                 break;
               case 'facebook':
                 window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url));
