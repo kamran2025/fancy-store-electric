@@ -251,11 +251,10 @@
           });
 
           function shareOnSocialMedia(platform) {
-            let url = window.location.href;
 
             switch (platform) {
               case 'whatsapp':
-                window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('<%= product.get("image") %>' + '\n' + '<%= product.get("title") %>' + '\n' + url));
+                window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(url));
                 break;
               case 'facebook':
                 window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url));
